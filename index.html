@@ -89,7 +89,10 @@
 
         .instruction { color: #27ae60; font-weight: bold; margin-bottom: 10px; display: none; text-align: center; font-size: 14px; }
         #resultContainer { display: none; margin-top: 25px; text-align: center; }
-        #finalReportImage { width: 100%; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); border: 5px solid white; }
+        #finalReportImage { width: 100%; max-width: 100%; height: auto; display: block; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); border: 5px solid white; }
+        /* กล่องแสดงผลลัพธ์: จำกัดความสูงให้พอดีจอมือถือ เลื่อนดูรูปยาวได้ ไม่ล้น */
+        #resultContainer .report-scroll { max-height: 78vh; overflow-y: auto; -webkit-overflow-scrolling: touch;
+            border-radius: 20px; margin-top: 6px; }
         
         .section { margin-bottom: 20px; }
         label { display: block; margin-bottom: 8px; font-weight: bold; }
@@ -97,10 +100,11 @@
         select { appearance: none; -webkit-appearance: none; padding-right: 38px; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='3'><path d='M6 9l6 6 6-6'/></svg>"); background-repeat: no-repeat; background-position: right 14px center; }
         textarea { resize: vertical; min-height: 52px; }
         
-        #captureArea { position: absolute; left: -9999px; top: 0; width: 450px; padding: 30px; background: #fdf5e6; color: #2c3e50; }
-        .status-badge { display: inline-block; padding: 10px 25px; border-radius: 40px; color: white; font-weight: bold; font-size: 22px; margin-top: 15px; }
+        #captureArea { position: absolute; left: -9999px; top: 0; width: 450px; padding: 22px 22px 20px; background: #fdf5e6; color: #2c3e50; }
+        #captureArea h2 { margin: 2px 0 6px; font-size: 1.5rem; }
+        .status-badge { display: inline-block; padding: 8px 24px; border-radius: 40px; color: white; font-weight: bold; font-size: 20px; margin-top: 9px; }
         .status-pass { background: #27ae60; } .status-fail { background: #e74c3c; }
-        .info-row { margin-bottom: 12px; font-size: 17px; border-bottom: 1px solid #eeebe3; padding-bottom: 6px; text-align: left; }
+        .info-row { margin-bottom: 7px; font-size: 15.5px; line-height: 1.35; border-bottom: 1px solid #eeebe3; padding-bottom: 4px; text-align: left; }
 
         /* ══════════════ เพิ่มสีสัน (Color Enhancements) ══════════════ */
         /* พื้นหลังมีแสงสีอ่อน ๆ ไล่ตามมุม */
@@ -337,8 +341,6 @@
             <option value="21472 นาย สวัสดิ์ อ่อนน้อมดี">21472 นาย สวัสดิ์ อ่อนน้อมดี</option>
             <option value="22001 นาย ธนบูรย์ อวดปาก">22001 นาย ธนบูรย์ อวดปาก</option>
             <option value="21913 นาย สุธิราช พรหมพิทักษ์">21913 นาย สุธิราช พรหมพิทักษ์</option>
-            <option value="22149 นาย สุธีร์ ทองเปลี่ยว">22149 นาย สุธีร์ ทองเปลี่ยว</option>
-            <option value="22150 นาย อานนท์ บุญนอก">22150 นาย อานนท์ บุญนอก</option>
             <option value="__OTHER__">✏️ อื่นๆ (ระบุเอง)</option>
         </select>
         <div id="customStaffBox" style="display:none; margin-top:10px;">
@@ -370,12 +372,12 @@
     
     <div id="resultContainer">
         <p id="iosText" class="instruction">บันทึกสำเร็จ! หากเครื่องไม่โหลดรูปให้เองให้ "กดค้างที่รูป" เพื่อบันทึกลงเครื่องครับ</p>
-        <img id="finalReportImage" src="">
+        <div class="report-scroll"><img id="finalReportImage" src=""></div>
         <button class="btn-main" style="margin-top:15px; background:#e67e22;" onclick="location.reload()">🔄 เริ่มบันทึกใหม่</button>
     </div>
 
     <div id="captureArea">
-        <div style="text-align: center; border-bottom: 2px solid #3498db; padding-bottom: 15px; margin-bottom: 20px;">
+        <div style="text-align: center; border-bottom: 2px solid #3498db; padding-bottom: 10px; margin-bottom: 13px;">
             <h2 style="color:#2c3e50;">✨ รายงานตรวจบุคลิกภาพ ✨</h2>
             <div id="resStatusBadge" class="status-badge"></div>
         </div>
@@ -386,7 +388,7 @@
         <div class="info-row"><strong>🏆 คะแนน:</strong> <span id="resScore"></span></div>
         <div class="info-row"><strong>✅ ผ่าน:</strong> <span id="resTasks"></span></div>
         <div class="info-row"><strong>📝 หมายเหตุ:</strong> <span id="resNote"></span></div>
-        <img id="resImg" style="width:100%; display:none; border-radius:15px; margin-top:15px;">
+        <img id="resImg" style="width:100%; height:auto; display:none; border-radius:15px; margin:14px 0 0;">
     </div>
 </div>
 
