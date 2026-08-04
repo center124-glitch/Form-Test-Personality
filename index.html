@@ -11,13 +11,13 @@
         *, *::before, *::after { box-sizing: border-box; }
         :root { 
             --primary: #3498db; --success: #27ae60; --danger: #e74c3c; 
-            --bg: #fdf5e6; --header-sky: #e3f2fd; --card: #ffffff;
+            --bg: #eef3ff; --header-sky: #e3f2fd; --card: #ffffff;
             --text-color: #2c3e50; --input-bg: #ffffff; --input-border: #ddd;
             --glow-color: rgba(52, 152, 219, 0.5);
         }
 
         body.dark-mode {
-            --bg: #1a1a1a; --card: #2d2d2d; --header-sky: #3d4b55;
+            --bg: #131a2e; --card: #2d2d2d; --header-sky: #3d4b55;
             --text-color: #ecf0f1; --input-bg: #3d3d3d; --input-border: #555;
             --glow-color: rgba(52, 152, 219, 0.3);
         }
@@ -29,7 +29,7 @@
         @keyframes glowPulse { 0%, 100% { box-shadow: 0 0 5px var(--glow-color); } 50% { box-shadow: 0 0 20px var(--glow-color); } }
 
         body { font-family: 'Sarabun', sans-serif; background-color: var(--bg); padding: 15px; margin: 0; color: var(--text-color); transition: 0.3s; }
-        .container { max-width: 500px; background: var(--card); padding: 25px; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); margin: auto; animation: fadeInUp 0.8s ease-out; }
+        .container { max-width: 500px; background: linear-gradient(160deg,#ffffff 0%,#f3f7ff 42%,#f6f2ff 100%); padding: 25px; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); margin: auto; animation: fadeInUp 0.8s ease-out; }
         
         .header-wrapper { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; gap: 10px; }
         /* หัวฟอร์ม: พื้นโทนเข้ม + แถบ/แสงสีสดใส (คงโทนเดียวกันทั้งสองธีม เป็นแบนเนอร์ผลิตภัณฑ์) */
@@ -101,6 +101,106 @@
         .status-badge { display: inline-block; padding: 10px 25px; border-radius: 40px; color: white; font-weight: bold; font-size: 22px; margin-top: 15px; }
         .status-pass { background: #27ae60; } .status-fail { background: #e74c3c; }
         .info-row { margin-bottom: 12px; font-size: 17px; border-bottom: 1px solid #eeebe3; padding-bottom: 6px; text-align: left; }
+
+        /* ══════════════ เพิ่มสีสัน (Color Enhancements) ══════════════ */
+        /* พื้นหลังมีแสงสีอ่อน ๆ ไล่ตามมุม */
+        body {
+            background:
+                radial-gradient(1150px 560px at 8% -10%, rgba(56,189,248,0.38), transparent 58%),
+                radial-gradient(1000px 520px at 112% 0%, rgba(168,85,247,0.34), transparent 58%),
+                radial-gradient(900px 560px at 50% 118%, rgba(236,72,153,0.28), transparent 60%),
+                radial-gradient(760px 520px at 88% 92%, rgba(245,158,11,0.22), transparent 60%),
+                var(--bg);
+            background-attachment: fixed;
+        }
+        body.dark-mode {
+            background:
+                radial-gradient(1150px 560px at 8% -10%, rgba(56,189,248,0.28), transparent 58%),
+                radial-gradient(1000px 520px at 112% 0%, rgba(168,85,247,0.30), transparent 58%),
+                radial-gradient(900px 560px at 50% 118%, rgba(236,72,153,0.22), transparent 60%),
+                radial-gradient(760px 520px at 88% 92%, rgba(245,158,11,0.16), transparent 60%),
+                var(--bg);
+            background-attachment: fixed;
+        }
+        /* การ์ดหลัก + แถบสีรุ้งบนสุด */
+        .container { position: relative; border: 1px solid rgba(148,163,184,0.22);
+            box-shadow: 0 22px 60px -20px rgba(30,41,89,0.38), 0 4px 14px rgba(0,0,0,0.06); }
+        body.dark-mode .container { border-color: rgba(255,255,255,0.06); }
+        .container::before {
+            content:''; position:absolute; left:0; right:0; top:0; height:5px;
+            border-radius: 24px 24px 0 0;
+            background: linear-gradient(90deg,#22d3ee,#3b82f6,#a855f7,#ec4899,#f59e0b);
+            background-size: 200% 100%; animation: shimmer 5s infinite linear;
+        }
+        /* ป้ายหัวข้อแต่ละส่วน มีแถบสีนำหน้า */
+        .section > label { border-left: 3px solid #3b82f6; padding-left: 9px; }
+        .section:nth-of-type(1) > label { border-left-color:#22d3ee; }
+        .section:nth-of-type(2) > label { border-left-color:#a855f7; }
+        .section:nth-of-type(3) > label { border-left-color:#ec4899; }
+        .section:nth-of-type(4) > label { border-left-color:#f59e0b; }
+        /* ช่องกรอกเมื่อโฟกัส มีขอบ+เงาสี */
+        select:focus, textarea:focus, input[type="text"]:focus, input[type="date"]:focus {
+            outline: none; border-color: #3b82f6;
+            box-shadow: 0 0 0 4px rgba(59,130,246,0.16);
+        }
+        /* รายการเช็ค: กรอบไล่สี + แถบสีซ้าย + hover มีมิติ */
+        .checklist-item {
+            background:
+                linear-gradient(var(--input-bg),var(--input-bg)) padding-box,
+                linear-gradient(135deg, rgba(59,130,246,0.35), rgba(168,85,247,0.28)) border-box;
+            border: 1px solid transparent;
+            box-shadow: 0 2px 8px rgba(30,41,89,0.05);
+        }
+        .checklist-item::before {
+            content:''; position:absolute; left:0; top:12%; bottom:12%; width:4px; border-radius:0 4px 4px 0;
+            background: linear-gradient(#3b82f6,#a855f7); opacity:0.5; transition:0.3s;
+        }
+        .checklist-item:hover { transform: translateX(8px); border-color: transparent;
+            box-shadow: 0 10px 22px -8px rgba(59,130,246,0.40); }
+        .checklist-item:hover::before { opacity:1; width:5px; }
+        .checklist-item:has(input:checked) {
+            background:
+                linear-gradient(rgba(16,185,129,0.13),rgba(16,185,129,0.13)) padding-box,
+                linear-gradient(135deg,#10b981,#22d3ee) border-box;
+        }
+        .checklist-item:has(input:checked)::before { background: linear-gradient(#10b981,#22d3ee); opacity:1; }
+        .checklist-item input { accent-color: #10b981; }
+        /* คะแนน: ป้ายไล่สี + แถบพื้นนุ่ม */
+        .score-pill { background: linear-gradient(135deg,#3b82f6,#a855f7); color:#fff; font-weight:800;
+            box-shadow: 0 5px 14px -4px rgba(124,77,255,0.55); }
+        .score-bar-bg { background: rgba(148,163,184,0.25); height:12px; }
+        /* ปุ่มบันทึกหลัก: ไล่สีสดใส */
+        .btn-main { background: linear-gradient(135deg,#3b82f6 0%,#6366f1 45%,#a855f7 100%);
+            box-shadow: 0 12px 26px -10px rgba(99,102,241,0.7); }
+        .btn-main:hover { box-shadow: 0 16px 34px -8px rgba(124,77,255,0.78); }
+        .btn-main:disabled { background: #b0b7c3; box-shadow:none; }
+        /* กล่อง "ระบุเอง" มีกรอบไล่สีอ่อน */
+        #customStaffBox { padding:12px; border-radius:14px; margin-top:10px;
+            background: linear-gradient(135deg, rgba(59,130,246,0.08), rgba(168,85,247,0.09));
+            border:1px dashed rgba(124,77,255,0.45); }
+
+        /* การ์ดกรอกข้อมูล — ธีมมืด: ไล่สีน้ำเงินเข้มนุ่ม (ไม่เทาทึบ) */
+        body.dark-mode .container {
+            background: linear-gradient(160deg,#26314e 0%,#222c46 45%,#2a2544 100%);
+        }
+        /* ช่องกรอก (select/date/text/textarea) มีพื้นไล่สีอ่อน ไม่ขาวล้วน */
+        select, textarea, input[type="text"], input[type="date"] {
+            background: linear-gradient(180deg,#ffffff,#f2f6ff);
+        }
+        body.dark-mode select, body.dark-mode textarea,
+        body.dark-mode input[type="text"], body.dark-mode input[type="date"] {
+            background: linear-gradient(180deg,#33406182,#2b3554);
+        }
+        /* แต่ละ section มีพื้นการ์ดสีจาง ๆ ต่างโทนกัน อ่านง่ายเป็นกลุ่ม */
+        .section { padding:14px 14px 4px; border-radius:16px; }
+        .section:nth-of-type(1) { background: linear-gradient(135deg, rgba(34,211,238,0.10), rgba(59,130,246,0.06)); }
+        .section:nth-of-type(2) { background: linear-gradient(135deg, rgba(168,85,247,0.10), rgba(139,92,246,0.05)); }
+        .section:nth-of-type(3) { background: linear-gradient(135deg, rgba(236,72,153,0.09), rgba(244,114,182,0.05)); }
+        .section:nth-of-type(4) { background: linear-gradient(135deg, rgba(245,158,11,0.10), rgba(251,191,36,0.05)); }
+        body.dark-mode .section:nth-of-type(1) { background: linear-gradient(135deg, rgba(34,211,238,0.14), rgba(59,130,246,0.08)); }
+        body.dark-mode .section:nth-of-type(2) { background: linear-gradient(135deg, rgba(168,85,247,0.16), rgba(139,92,246,0.08)); }
+        body.dark-mode .section:nth-of-type(3) { background: linear-gradient(135deg, rgba(236,72,153,0.14), rgba(244,114,182,0.08)); }
+        body.dark-mode .section:nth-of-type(4) { background: linear-gradient(135deg, rgba(245,158,11,0.15), rgba(251,191,36,0.08)); }
     </style>
 <!-- ── PWA / Home-screen icon (single-file, base64 embedded) ── -->
 <meta name="theme-color" content="#1e2a44">
@@ -237,6 +337,8 @@
             <option value="21472 นาย สวัสดิ์ อ่อนน้อมดี">21472 นาย สวัสดิ์ อ่อนน้อมดี</option>
             <option value="22001 นาย ธนบูรย์ อวดปาก">22001 นาย ธนบูรย์ อวดปาก</option>
             <option value="21913 นาย สุธิราช พรหมพิทักษ์">21913 นาย สุธิราช พรหมพิทักษ์</option>
+            <option value="22149 นาย สุธีร์ ทองเปลี่ยว">22149 นาย สุธีร์ ทองเปลี่ยว</option>
+            <option value="22150 นาย อานนท์ บุญนอก">22150 นาย อานนท์ บุญนอก</option>
             <option value="__OTHER__">✏️ อื่นๆ (ระบุเอง)</option>
         </select>
         <div id="customStaffBox" style="display:none; margin-top:10px;">
@@ -330,7 +432,10 @@
             $('scoreDisplay').textContent = count + ' / ' + TOTAL_ITEMS;
             const bar = $('scoreBar');
             bar.style.width = (count / TOTAL_ITEMS * 100) + '%';
-            bar.style.background = count >= PASS_THRESHOLD ? '#27ae60' : (count >= 3 ? '#f39c12' : '#e74c3c');
+            // แถบคะแนนไล่สีตามสถานะ: ผ่าน=เขียว, เกือบ=อำพัน, ต่ำ=แดง
+            bar.style.background = count >= PASS_THRESHOLD
+                ? 'linear-gradient(90deg,#10b981,#34d399)'
+                : (count >= 3 ? 'linear-gradient(90deg,#f59e0b,#fbbf24)' : 'linear-gradient(90deg,#ef4444,#f87171)');
         } catch (err) { console.error('updateScore error:', err); }
     }
 
